@@ -293,12 +293,13 @@ a { color: inherit; }
 .curtain { background: var(--white); color: var(--ink); }
 .cv {
   --p: 50%;
-  position: relative; margin-top: clamp(2rem, 4vw, 3.5rem);
-  height: clamp(480px, 64vh, 640px); border-radius: 26px; overflow: hidden;
+  position: relative;
+  min-height: clamp(420px, 56vh, 600px); border-radius: 26px; overflow: hidden;
   background: #f6f1e5; box-shadow: 0 40px 80px -40px rgba(13, 11, 16, .45), 0 0 0 1px rgba(13, 11, 16, .08);
   user-select: none; -webkit-user-select: none; touch-action: pan-y;
 }
-.cv-many { position: absolute; inset: 0; padding: clamp(14px, 2.4vw, 30px); font: 400 .78rem/1.45 Georgia, "Times New Roman", serif; color: #2b2721; overflow: hidden; }
+/* «много» задаёт высоту карточки — текст никогда не обрезается */
+.cv-many { position: relative; min-height: inherit; padding: clamp(14px, 2.4vw, 30px); font: 400 .78rem/1.45 Georgia, "Times New Roman", serif; color: #2b2721; overflow: hidden; }
 .np-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; border-bottom: 3px double #2b2721; padding-bottom: .6rem; margin-bottom: .9rem; font: 700 .68rem/1 var(--f-body); letter-spacing: .08em; text-transform: uppercase; }
 .np-head b { font: 900 clamp(1.1rem, .7rem + 1.8vw, 2.3rem)/1 var(--f-display); letter-spacing: -.02em; text-transform: none; }
 .np-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 1.2rem; }
@@ -318,9 +319,9 @@ a { color: inherit; }
 .cv-few div { display: grid; gap: .6rem; }
 .cv-few b { font: 900 clamp(2.6rem, 1rem + 7vw, 6.8rem)/1 var(--f-display); letter-spacing: -.05em; }
 .cv-few span { font-size: 1rem; opacity: .55; letter-spacing: .05em; }
-.cv-tag { position: absolute; top: 18px; font: 800 .7rem/1 var(--f-body); letter-spacing: .25em; padding: .5rem .7rem; border-radius: 999px; background: var(--ink); color: #fff; pointer-events: none; }
-.cv-tag-l { left: 18px; }
-.cv-tag-r { right: 18px; background: var(--red); }
+.cv-tags { display: flex; justify-content: space-between; margin: clamp(2rem, 4vw, 3.5rem) 0 .8rem; }
+.cv-tag { font: 800 .72rem/1 var(--f-body); letter-spacing: .2em; padding: .55rem .8rem; border-radius: 999px; background: var(--ink); color: #fff; }
+.cv-tag-r { background: var(--red); }
 .cv-handle {
   position: absolute; top: 0; bottom: 0; left: var(--p); width: 48px; margin-left: -24px;
   cursor: ew-resize; touch-action: none; display: grid; place-items: center; z-index: 3;
@@ -649,7 +650,9 @@ a { color: inherit; }
   .sk-next canvas { width: 40px; height: 40px; }
   .np-grid { grid-template-columns: 1fr; }
   .np-side { display: none; }
-  .cv-many { font-size: .74rem; }
+  .cv-many { font-size: .76rem; padding: 16px 14px 18px; }
+  .np-grid h3 { font-size: 1.2rem; }
+  .np-img { height: 70px; }
   .np-head span:first-child, .np-head span:last-child { display: none; }
   .wg-desk { height: 580px; }
   .wgt-clock { left: 3%; top: 3%; width: 132px; }

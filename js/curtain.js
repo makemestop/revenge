@@ -39,7 +39,7 @@
     const seq = [72, 28, 50];
     seq.forEach((v, i) => setTimeout(() => { if (cv.classList.contains('nudge')) set(v); }, 500 + i * 950));
     setTimeout(() => cv.classList.remove('nudge'), 500 + seq.length * 950);
-  }, { threshold: 0.6 });
+  }, { threshold: 0.4 });
   io.observe(cv);
   set(50);
 })();
