@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0d0b10">
+<title>Revenge — сайты, которые удивляют</title>
+<meta name="description" content="Листайте и пробуйте: всё, что можно сделать на сайте — от живого текста до 3D, игр и физики.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Revenge — сайты, которые удивляют">
+<meta property="og:description" content="Листайте и пробуйте: всё, что можно сделать на сайте — от живого текста до 3D, игр и физики.">
+<meta property="og:image" content="https://makemestop.github.io/revenge/assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23e5243b'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='%23fff' font-family='sans-serif' font-weight='900'%3ER%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Comfortaa:wght@700&family=Dela+Gothic+One&family=Lobster&family=Manrope:wght@400;600;800&family=Playfair+Display:ital,wght@1,700&family=Press+Start+2P&family=Rubik+Mono+One&family=Unbounded:wght@400;700;900&family=VT323&display=swap">
+<link rel="stylesheet" href="css/main.css">
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.min.js" } }</script>
+</head>
+<body>
+
+<!-- ============ HUD ============ -->
+<header class="hud" aria-label="Навигация">
+  <button class="hud-logo" id="hudLogo" aria-label="Наверх">REVENGE</button>
+  <div class="hud-chapter" aria-hidden="true"><b id="hudNum">00</b><span id="hudName">Вход</span></div>
+</header>
+<div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+
+<!-- ============ ПЛЕЕР ============ -->
+<aside class="player" id="player" aria-label="Музыкальный плеер">
+  <button class="vinyl-btn" id="vinylBtn" aria-label="Открыть плеер">
+    <canvas class="vinyl-viz" id="vinylViz" width="200" height="200"></canvas>
+    <span class="vinyl"><span class="vinyl-label">STAY</span></span>
+  </button>
+  <div class="player-card" id="playerCard">
+    <div class="pc-cover"><span>STAY</span></div>
+    <div class="pc-meta">
+      <b>STAY</b>
+      <span>The Kid LAROI, Justin Bieber</span>
+    </div>
+    <div class="pc-progress" id="pcProgress" role="slider" aria-label="Перемотка" tabindex="0"><i id="pcBar"></i></div>
+    <div class="pc-time"><span id="pcCur">0:00</span><span id="pcDur">0:00</span></div>
+    <div class="pc-controls">
+      <button class="pc-play magnetic" id="pcPlay" aria-label="Играть / пауза"><svg viewBox="0 0 24 24"><path class="i-play" d="M8 5v14l11-7z"/><path class="i-pause" d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg></button>
+      <label class="pc-vol"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z"/></svg><input type="range" id="pcVol" min="0" max="1" step="0.01" value="0.6" aria-label="Громкость"></label>
+      <button class="pc-close" id="pcClose" aria-label="Свернуть плеер">✕</button>
+    </div>
+  </div>
+</aside>
+
+<!-- ============ 00 ВХОД ============ -->
+<section class="intro" id="intro" data-chapter="Вход">
+  <canvas class="petals" id="introPetals"></canvas>
+  <div class="intro-top"><span>REVENGE STUDIO</span><span>TOKYO STYLE · 2026</span></div>
+  <div class="intro-logo">
+    <div class="sun" aria-hidden="true"></div>
+    <h1 class="logo" id="logo" aria-label="Revenge"><span class="lt">R</span><span class="lt">E</span><span class="lt">V</span><span class="lt">E</span><span class="lt">N</span><span class="lt">G</span><span class="lt">E</span></h1>
+    <span class="logo-jp" aria-hidden="true">リベンジ</span>
+  </div>
+  <p class="intro-sub">Сайты, которые запоминают с первого экрана</p>
+  <div class="intro-enter" id="introEnter">
+    <button class="btn btn-red magnetic" id="enterSound">Войти со звуком <span aria-hidden="true">♪</span></button>
+    <button class="btn btn-ghost magnetic" id="enterMute">Без звука</button>
+  </div>
+  <div class="scroll-hint" id="scrollHint" aria-hidden="true"><span>Листайте</span><i></i></div>
+</section>
+
+<!-- ============ 01 ТИПОГРАФИКА ============ -->
+<section class="sec typo" id="type" data-chapter="Текст">
+  <div class="wrap">
+    <p class="kicker">01 — Живой текст</p>
+    <div class="tt-stage" id="ttStage">
+      <h2 class="tt" id="tt" data-text="Вам нужен сайт?">Вам нужен сайт?</h2>
+    </div>
+    <p class="lead">Шрифт, размер, цвет, градиент, неон, анимация. Текст на сайте может быть каким угодно — даже убегать от курсора. Выберите стиль:</p>
+    <div class="chips" id="ttChips" role="group" aria-label="Стиль текста"></div>
+  </div>
+</section>
+
+<!-- ============ 02 ЧАСТИЦЫ ============ -->
+<section class="sec dust" id="dust" data-chapter="Частицы">
+  <div class="wrap dust-head">
+    <p class="kicker">02 — Из пыли</p>
+    <h2 class="title">Каждая буква — тысячи частиц</h2>
+    <p class="lead">Проведите по надписи, чтобы разогнать частицы. Нажмите — и они соберутся в новое слово.</p>
+  </div>
+  <canvas class="dust-canvas" id="dustCanvas" data-cursor="жми"></canvas>
+  <p class="dust-count" id="dustCount" aria-hidden="true"></p>
+</section>
+
+<!-- ============ 03 МНОГО / МАЛО ============ -->
+<section class="sec curtain" id="curtain" data-chapter="Много / мало">
+  <div class="wrap">
+    <p class="kicker">03 — Сколько слов</p>
+    <h2 class="title">Много текста или мало?</h2>
+    <p class="lead">Кому-то нужна подробная статья, кому-то — три слова. Потяните шторку.</p>
+    <div class="cv" id="cv">
+      <div class="cv-many">
+        <header class="np-head"><span>№ 42 · октябрь 2026</span><b>ВЕСТНИК REVENGE</b><span>Цена: бесплатно</span></header>
+        <div class="np-grid">
+          <article class="np-main">
+            <h3>Сайт, который продаёт, пока вы спите</h3>
+            <p class="np-drop">Хороший сайт работает круглые сутки: встречает гостя, рассказывает о вас, отвечает на вопросы и ведёт к заявке. Он не устаёт, не болеет и не берёт выходных. Человек заходит в два часа ночи — и всё равно получает лучшую версию вашей презентации.</p>
+            <p>Мы собираем страницы под задачу, а не под шаблон. Сначала разбираемся, кто ваш клиент и что его цепляет, потом придумываем, как это показать: через историю, игру, анимацию или тишину и воздух. Каждый блок должен работать, а не просто занимать место.</p>
+            <div class="np-img" aria-hidden="true"></div>
+            <p>Отдельная история — скорость. Красивый сайт, который грузится десять секунд, никто не досмотрит. Поэтому тяжёлые эффекты включаются только тогда, когда вы до них долистали, а на телефоне всё работает от прикосновения пальца.</p>
+          </article>
+          <aside class="np-side">
+            <h4>Цитата недели</h4>
+            <blockquote>«Сайт — это первое свидание с клиентом. Второго может не быть»</blockquote>
+            <h4>Коротко</h4>
+            <ul>
+              <li>Лендинги и сайты-визитки</li>
+              <li>Магазины и каталоги</li>
+              <li>Mini Apps в Telegram</li>
+              <li>Боты с заявками</li>
+              <li>Игры и спецпроекты</li>
+            </ul>
+            <div class="np-img np-img2" aria-hidden="true"></div>
+            <p>Анимации, 3D, музыка, мини-игры — всё это не украшение, а способ удержать внимание дольше трёх секунд.</p>
+          </aside>
+          <article class="np-col">
+            <h4>Как мы работаем</h4>
+            <p>Вы рассказываете идею своими словами — можно голосовым. Мы задаём вопросы, предлагаем, как сделать лучше, показываем макет. Вы правите — мы переделываем. Готовый сайт выкладываем в интернет и передаём вам.</p>
+            <h4>Сколько это стоит</h4>
+            <p>Зависит от задачи: страница-визитка и спецпроект с игрой — разные истории. Напишите, что хотите получить, и мы назовём честную цену и сроки до начала работы.</p>
+            <p class="np-small">Этот текст набран мелко специально: иногда клиенту действительно нужно рассказать много. Тогда важно, чтобы его было удобно читать — колонки, заголовки, воздух.</p>
+          </article>
+        </div>
+      </div>
+      <div class="cv-few" id="cvFew">
+        <div><b>Главное.</b><span>Ничего лишнего.</span></div>
+      </div>
+      <span class="cv-tag cv-tag-l">МНОГО</span>
+      <span class="cv-tag cv-tag-r">МАЛО</span>
+      <div class="cv-handle" id="cvHandle" role="slider" tabindex="0" aria-label="Шторка: много или мало текста" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><i aria-hidden="true">⟷</i></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 ВРЕМЕНА ГОДА ============ -->
+<section class="seasons" id="seasons" data-chapter="Времена года">
+  <div class="ss-stage" id="ssStage">
+    <canvas class="ss-scene" id="scSummer" data-season="summer"></canvas>
+    <canvas class="ss-scene" id="scAutumn" data-season="autumn" data-cursor="протри"></canvas>
+    <canvas class="ss-scene" id="scWinter" data-season="winter"></canvas>
+    <canvas class="ss-scene" id="scSpring" data-season="spring" data-cursor="коснись"></canvas>
+    <div class="suika-ui" id="suikaUi">
+      <div class="sk-score"><span>Счёт</span><b id="skScore">0</b></div>
+      <div class="sk-best"><span>Рекорд</span><b id="skBest">0</b></div>
+      <div class="sk-next"><span>Дальше</span><canvas id="skNext" width="80" height="80"></canvas></div>
+      <div class="sk-over" id="skOver" hidden>
+        <b>Банка полна!</b>
+        <span>Счёт: <em id="skFinal">0</em></span>
+        <button class="btn btn-red magnetic" id="skRestart">Ещё раз</button>
+      </div>
+    </div>
+  </div>
+  <div class="ss-head">
+    <p class="kicker">04 — Любая атмосфера</p>
+    <h2 class="ss-title" id="ssTitle">Лето</h2>
+    <p class="ss-hint" id="ssHint">Бросайте фрукты в банку. Два одинаковых сливаются в один побольше — дойдёте до арбуза?</p>
+  </div>
+  <div class="ss-tabs" role="tablist" aria-label="Времена года">
+    <button role="tab" class="ss-tab" data-season="summer" aria-selected="true"><span aria-hidden="true">☀️</span>Лето</button>
+    <button role="tab" class="ss-tab" data-season="autumn" aria-selected="false"><span aria-hidden="true">🍁</span>Осень</button>
+    <button role="tab" class="ss-tab" data-season="winter" aria-selected="false"><span aria-hidden="true">❄️</span>Зима</button>
+    <button role="tab" class="ss-tab" data-season="spring" aria-selected="false"><span aria-hidden="true">🌸</span>Весна</button>
+  </div>
+</section>
+
+<!-- ============ 05 3D ============ -->
+<section class="sec three" id="three" data-chapter="3D">
+  <div class="wrap three-grid">
+    <div class="three-text">
+      <p class="kicker">05 — Объём</p>
+      <h2 class="title">3D прямо в&nbsp;браузере</h2>
+      <p class="lead">Без приложений и плагинов. Покрутите фигуру пальцем или мышкой, смените форму и материал — так можно показать товар, логотип или целый мир.</p>
+      <div class="three-ctl">
+        <span>Форма</span>
+        <div class="chips" id="shapeChips">
+          <button class="chip is-on" data-shape="knot">Узел</button>
+          <button class="chip" data-shape="blob">Капля</button>
+          <button class="chip" data-shape="crystal">Кристалл</button>
+          <button class="chip" data-shape="ring">Кольцо</button>
+        </div>
+        <span>Материал</span>
+        <div class="chips" id="matChips">
+          <button class="chip is-on" data-mat="glass">Стекло</button>
+          <button class="chip" data-mat="chrome">Хром</button>
+          <button class="chip" data-mat="neon">Неон</button>
+          <button class="chip" data-mat="pastel">Пастель</button>
+        </div>
+      </div>
+    </div>
+    <div class="three-view" id="threeView" data-cursor="крути">
+      <canvas id="threeCanvas"></canvas>
+      <p class="three-fallback" id="threeFallback" hidden>Ваш браузер не поддерживает 3D. На большинстве телефонов и компьютеров всё работает.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 КОНСТРУКТОР ============ -->
+<section class="sec widgets" id="widgets" data-chapter="Конструктор">
+  <div class="wrap wg-grid">
+    <div class="wg-text">
+      <p class="kicker">06 — Конструктор</p>
+      <h2 class="title">Добавьте. Уберите. Передвиньте.</h2>
+      <p class="lead">Часы, календарь, погода, таймер, музыка — включайте, что нужно. Виджеты можно перетаскивать.</p>
+      <ul class="wg-toggles" id="wgToggles">
+        <li><label><span>Часы</span><input type="checkbox" data-w="clock" checked><i></i></label></li>
+        <li><label><span>Календарь</span><input type="checkbox" data-w="cal" checked><i></i></label></li>
+        <li><label><span>Погода</span><input type="checkbox" data-w="weather"><i></i></label></li>
+        <li><label><span>До Нового года</span><input type="checkbox" data-w="ny"><i></i></label></li>
+        <li><label><span>Заметка</span><input type="checkbox" data-w="note"><i></i></label></li>
+        <li><label><span>Музыкальный плеер <small>— тот самый, в углу</small></span><input type="checkbox" data-w="player" checked><i></i></label></li>
+      </ul>
+    </div>
+    <div class="wg-window">
+      <div class="wg-bar"><i></i><i></i><i></i><span>ваш-сайт.рф</span></div>
+      <div class="wg-desk" id="wgDesk">
+        <div class="wg-empty">Включите виджеты слева</div>
+        <div class="wgt wgt-clock" data-w="clock">
+          <svg viewBox="0 0 100 100" class="clock-face" aria-hidden="true">
+            <circle cx="50" cy="50" r="47"/>
+            <g class="clock-ticks"></g>
+            <line id="hH" x1="50" y1="50" x2="50" y2="28"/>
+            <line id="hM" x1="50" y1="50" x2="50" y2="16"/>
+            <line id="hS" x1="50" y1="58" x2="50" y2="12"/>
+            <circle cx="50" cy="50" r="2.6" class="clock-dot"/>
+          </svg>
+          <b id="clockDigits">00:00</b>
+        </div>
+        <div class="wgt wgt-cal" data-w="cal">
+          <b id="calTitle"></b>
+          <div class="cal-grid" id="calGrid"></div>
+        </div>
+        <div class="wgt wgt-weather" data-w="weather">
+          <div class="wx-city" id="wxCity">
+            <button data-city="msk" class="is-on">Москва</button><button data-city="tyo">Токио</button><button data-city="dxb">Дубай</button>
+          </div>
+          <div class="wx-main"><span class="wx-ico" id="wxIco">⛅</span><b id="wxTemp">…</b></div>
+          <span class="wx-desc" id="wxDesc">загружаю</span>
+        </div>
+        <div class="wgt wgt-ny" data-w="ny">
+          <span>До Нового года</span>
+          <div class="ny-row"><b id="nyD">0</b><b id="nyH">0</b><b id="nyM">0</b><b id="nyS">0</b></div>
+          <div class="ny-lbl"><i>дней</i><i>часов</i><i>минут</i><i>секунд</i></div>
+        </div>
+        <div class="wgt wgt-note" data-w="note">
+          <span>Заметка</span>
+          <div class="note-text" id="noteText" contenteditable="true" spellcheck="false" aria-label="Заметка">Напишите здесь что угодно — заметка сохранится</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 ТЕЛЕВИЗОР ============ -->
+<section class="sec tvroom" id="tv" data-chapter="Кинотеатр">
+  <div class="wrap tv-grid">
+    <div class="tv-text">
+      <p class="kicker">07 — Кинотеатр</p>
+      <h2 class="title">Нажмите на телевизор</h2>
+      <p class="lead">Видео на весь экран, всё лишнее гаснет, а свет от картинки растекается вокруг — как подсветка у дорогих телевизоров.</p>
+    </div>
+    <button class="tv magnetic" id="tvBtn" aria-label="Включить режим кинотеатра">
+      <span class="tv-ant" aria-hidden="true"><i></i><i></i></span>
+      <span class="tv-body">
+        <span class="tv-screen">
+          <video id="tvMini" muted loop playsinline preload="none" src="assets/ch1.mp4"></video>
+          <canvas id="tvNoise" width="160" height="120"></canvas>
+          <span class="tv-scan" aria-hidden="true"></span>
+          <span class="tv-osd">CH 01</span>
+          <span class="tv-press">НАЖМИ</span>
+        </span>
+        <span class="tv-panel" aria-hidden="true"><i class="knob"></i><i class="knob knob2"></i><i class="grill"></i></span>
+      </span>
+      <span class="tv-legs" aria-hidden="true"><i></i><i></i></span>
+    </button>
+  </div>
+</section>
+
+<div class="cinema" id="cinema" aria-hidden="true">
+  <canvas class="cine-glow" id="cineGlow" width="48" height="27"></canvas>
+  <div class="cine-frame" id="cineFrame">
+    <video id="cineVideo" muted loop playsinline preload="none"></video>
+    <canvas class="cine-static" id="cineStatic" width="160" height="90"></canvas>
+    <span class="cine-osd" id="cineOsd">CH 01</span>
+  </div>
+  <div class="cine-ui">
+    <div class="cine-ch" id="cineCh">
+      <button data-ch="1" class="is-on">01 · Улица</button>
+      <button data-ch="2">02 · Неон</button>
+      <button data-ch="3">03 · Сакура</button>
+      <button data-ch="4">04 · Город</button>
+    </div>
+    <button class="cine-close" id="cineClose" aria-label="Выйти из кинотеатра">✕ Выйти</button>
+  </div>
+</div>
+
+<!-- ============ 08 ASMR ============ -->
+<section class="sec asmr" id="asmr" data-chapter="ASMR">
+  <div class="asmr-room" id="asmrRoom">
+    <div class="asmr-window" aria-hidden="true"><i class="moon"></i></div>
+    <div class="lamp" aria-hidden="true"><i class="lamp-shade"></i><i class="lamp-bulb"></i></div>
+    <div class="lamp-light" aria-hidden="true"></div>
+    <canvas class="cord" id="cord"></canvas>
+    <div class="wrap asmr-wrap">
+      <p class="kicker">08 — Релакс</p>
+      <h2 class="title">ASMR-клавиатура</h2>
+      <p class="lead">Нажимайте на клавиши — пальцем, мышкой или своей клавиатурой. Выберите звук и цвет. И дёрните за шнурок лампы.</p>
+      <div class="asmr-ctl">
+        <div class="chips" id="swChips" role="group" aria-label="Тип переключателей">
+          <button class="chip is-on" data-sw="thock">Thock</button>
+          <button class="chip" data-sw="clicky">Клики</button>
+          <button class="chip" data-sw="linear">Мягкие</button>
+          <button class="chip" data-sw="tactile">Тактильные</button>
+          <button class="chip" data-sw="typewriter">Печатная машинка</button>
+          <button class="chip" data-sw="bubble">Пузырьки</button>
+        </div>
+        <div class="chips" id="capChips" role="group" aria-label="Цвет клавиш">
+          <button class="chip is-on" data-cap="sakura">Сакура</button>
+          <button class="chip" data-cap="night">Ночь</button>
+          <button class="chip" data-cap="retro">Ретро</button>
+          <button class="chip" data-cap="mint">Мята</button>
+          <button class="chip" data-cap="rgb">RGB</button>
+        </div>
+      </div>
+      <div class="asmr-screen" id="asmrScreen" aria-live="off"><span id="asmrText"></span><i class="caret"></i></div>
+      <div class="kb" id="kb" data-cap="sakura"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 ГРАВИТАЦИЯ ============ -->
+<section class="sec gravity" id="gravity" data-chapter="Физика">
+  <div class="wrap gv-wrap" id="gvArea">
+    <p class="kicker gbody">09 — Физика</p>
+    <h2 class="title"><span class="gbody">Сайт</span> <span class="gbody">может</span> <span class="gbody">нарушать</span> <span class="gbody">законы</span> <span class="gbody">физики</span></h2>
+    <div class="gv-items">
+      <span class="gv-chip gbody">Лендинги</span>
+      <span class="gv-chip gbody">Магазины</span>
+      <span class="gv-chip gbody">Mini Apps</span>
+      <span class="gv-chip gbody">Боты</span>
+      <span class="gv-chip gbody">Игры</span>
+      <span class="gv-chip gbody">3D</span>
+      <span class="gv-chip gbody">Анимации</span>
+      <span class="gv-sticker gbody" aria-hidden="true">🌸</span>
+      <span class="gv-sticker gbody" aria-hidden="true">⚡</span>
+      <span class="gv-badge gbody">NEW</span>
+      <div class="gv-card gbody">
+        <i aria-hidden="true"></i>
+        <b>Кроссовки «Токио»</b>
+        <span>12 990 ₽</span>
+      </div>
+      <span class="gv-btn gbody">Купить</span>
+    </div>
+    <div class="gv-ctl">
+      <button class="btn btn-ink magnetic" id="gvZero">Отключить гравитацию</button>
+      <button class="btn btn-ghost-ink magnetic" id="gvDrop" hidden>Уронить всё</button>
+      <button class="btn btn-ghost-ink magnetic" id="gvReset" hidden>Вернуть порядок</button>
+    </div>
+    <p class="gv-hint" id="gvHint" hidden>Хватайте и бросайте элементы</p>
+  </div>
+</section>
+
+<!-- ============ 10 ФИНАЛ ============ -->
+<section class="final" id="final" data-chapter="Ваша идея">
+  <canvas class="petals" id="finalPetals"></canvas>
+  <div class="wrap final-wrap">
+    <p class="kicker">10 — Ваша очередь</p>
+    <h2 class="final-title">Есть идея?<br><span>Мы её соберём.</span></h2>
+    <p class="lead">Всё, что вы видели, — не предел. Расскажите своими словами, что хотите, и мы предложим, как это сделать.</p>
+    <a class="btn btn-red btn-big magnetic" id="ctaBtn" href="https://t.me/Takashi_Sakamoto?text=%D0%9F%D1%80%D0%B8%D0%B2%D0%B5%D1%82!%20%D0%AF%20%D1%81%D0%BE%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0%20Revenge%2C%20%D0%B5%D1%81%D1%82%D1%8C%20%D0%B8%D0%B4%D0%B5%D1%8F%3A%20" target="_blank" rel="noopener">Написать в Telegram</a>
+  </div>
+  <footer class="foot">
+    <span>© 2026 Revenge</span>
+    <span>Собрано без конструкторов и шаблонов</span>
+    <span class="egg-hint">🌸 На сайте спрятана пасхалка</span>
+  </footer>
+</section>
+
+<div class="egg" id="egg" aria-hidden="true">
+  <canvas id="eggCanvas"></canvas>
+  <div class="egg-msg"><b>復讐</b><span>Вы нашли пасхалку!</span><small>Такие секреты мы тоже умеем прятать</small></div>
+</div>
+
+<canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
+<div class="cursor" id="cursor" aria-hidden="true"><i class="c-dot"></i><i class="c-ring"><span id="cursorLabel"></span></i></div>
+
+<script src="vendor/matter.min.js"></script>
+<script src="js/core.js"></script>
+<script src="js/intro.js"></script>
+<script src="js/type.js"></script>
+<script src="js/dust.js"></script>
+<script src="js/curtain.js"></script>
+<script src="js/summer.js"></script>
+<script src="js/autumn.js"></script>
+<script src="js/winter.js"></script>
+<script src="js/spring.js"></script>
+<script src="js/seasons.js"></script>
+<script src="js/widgets.js"></script>
+<script src="js/tv.js"></script>
+<script src="js/asmr.js"></script>
+<script src="js/gravity.js"></script>
+<script src="js/final.js"></script>
+<script type="module" src="js/three-scene.js"></script>
+</body>
+</html>
